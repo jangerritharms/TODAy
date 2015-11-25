@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>TODAy</title>
+  <script type="text/javascript" src="./javascript/script.js" ></script>
 </head>
 <body>
   <header>
@@ -17,13 +18,13 @@
       </h1>
       <ul>
         <li>
-          Bananas
+          <input type="checkbox"> Bananas
         </li>
         <li>
-          Apples
+          <input type="checkbox"> Apples
         </li>
         <li>
-          Bread
+          <input type="checkbox"> Bread
         </li>
       </ul>
     </div>
@@ -33,20 +34,23 @@
       </h1>
       <ul>
         <li>
-          [Jan] Make html documents
+          <input type="checkbox">[Jan] Make html documents
         </li>
         <li>
-          [Yixuan] Photoshop stuff
+          <input type="checkbox">[Yixuan] Photoshop stuff
         </li>
         <li>
-          [someone] Create the javascripts
+          <input type="checkbox">[someone] Create the javascripts
         </li>
       </ul>
     </div>
-    <button id="main-add"></button>
-    <button class="hidden add-todo-list"></button>
-    <button class="hidden add-todo-item"></button>
-    <button class="hidden add-shared-list"></button>
+    <div class="todo-item dashboard-item">
+      <input type="checkbox"><h2 style="display:inline">Important Deadline</h2>
+    </div>
+    <button id="main-add">Add</button>
+    <button class="hidden add-todo-list">Add todo-list</button>
+    <button class="hidden add-todo-item" onclick="addTodoListItem()">Add todo-item</button>
+    <button class="hidden add-shared-list">Add shared list</button>
   </main>
 </body>
 </html>

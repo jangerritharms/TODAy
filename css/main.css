@@ -1,0 +1,45 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}
+
+header {
+  width: 80%;
+  margin: auto;
+  margin-top: 80px;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.button-row {
+  text-align: center;
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border-width: 0;
+  font-size: 20px;
+  background-color: #6294D3;
+  color: #eee;
+}
+
+.title {
+  width:90%;
+  margin: auto;
+}
+
+.title img {
+  width: 100%;
+}
+
+.subtitle {
+  width: 100%;
+  text-align: center;
+}

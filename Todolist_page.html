@@ -3,53 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>TODAy</title>
+  <script type="text/javascript" src="./javascript/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="./javascript/script.js" ></script>
 </head>
 <body>
   <header>
     <a href="./FrontPage.html">Home</a>
     <button class="header-button">Settings</button>
+    <button id="sort_by_date">Sort by deadline</button>
+    <button id="sort_by_importance">Sort by importance</button>
     <input type="text" name="search">
   </header>
   <main>
-    <div class="todo-list dashboard-item">
-      <h1>
-        Grocery store
-      </h1>
-      <ul>
-        <li>
-          <input type="checkbox"> Bananas
-        </li>
-        <li>
-          <input type="checkbox"> Apples
-        </li>
-        <li>
-          <input type="checkbox"> Bread
-        </li>
-      </ul>
-    </div>
-    <div class="todo-list shared-list dashboard-item">
-      <h1>
-        Group assignment
-      </h1>
-      <ul>
-        <li>
-          <input type="checkbox">[Jan] Make html documents
-        </li>
-        <li>
-          <input type="checkbox">[Yixuan] Photoshop stuff
-        </li>
-        <li>
-          <input type="checkbox">[someone] Create the javascripts
-        </li>
-      </ul>
-    </div>
-    <div class="todo-item dashboard-item">
-      <input type="checkbox"><h2 style="display:inline">Important Deadline</h2>
-    </div>
     <button id="main-add">Add</button>
     <button class="hidden add-todo-list">Add todo-list</button>
-    <button class="hidden add-todo-item" onclick="addTodoListItem()">Add todo-item</button>
+    <button class="hidden add-todo-item">Add todo-item</button>
     <button class="hidden add-shared-list">Add shared list</button>
   </main>
 </body>

@@ -1,0 +1,30 @@
+<html>
+<head>
+<title> date </title>
+</head>
+<body>
+<script language="javascript">
+console.log("hello world");
+function Note(note,type,user){
+this.note=note;
+this.type=type;
+this.user=user;
+}
+Note.prototype.setType=function(t){this.type=t;};
+Note.prototype.setNote=function(n){tis.note=n;};
+function NoteWithDeadline(note,type,dueDate){
+	this.note=note;
+	this.type=type;
+	this.dueDate=dueDate;
+}
+NoteWithDeadline.prototype=new Note();
+NoteWithDeadline.prototype.constructor=NoteWithDeadline;
+var nwd=new NoteWithDeadline("Maths homework",1,"1-1-2016");
+nwd.setDueDate=function(d){this.dueDate=d;};
+console.log(JSON.stringify(nwd));
+</script>
+</body>
+</html>
+<script>
+alert("hello world");
+</script>

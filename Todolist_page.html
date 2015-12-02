@@ -5,20 +5,34 @@
   <title>TODAy</title>
   <script type="text/javascript" src="./javascript/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="./javascript/script.js" ></script>
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./css/main.css" type="text/css">
 </head>
 <body>
-  <header>
+ <!---<header>
     <a href="./FrontPage.html">Home</a>
     <button class="header-button">Settings</button>
     <button id="sort_by_date">Sort by deadline</button>
     <button id="sort_by_importance">Sort by importance</button>
     <input type="text" name="search">
-  </header>
+  </header>-->
   <main>
-    <button id="main-add">Add</button>
-    <button class="hidden add-todo-list">Add todo-list</button>
-    <button class="hidden add-todo-item">Add todo-item</button>
-    <button class="hidden add-shared-list">Add shared list</button>
+    <section id ="s1" class="todos todosHome">
+      <p data-due="today" data-prio="urgent"> Do the dishes</p>
+      <p data-due="today" data-prio="neutral"> Do the laundrys</p>
+    </section>
+    <section id ="s2" class="todos todosUni">
+      <p data-due="tomorrow" data-prio="urgent"> Hand in assignment 1</p>
+      <p data-due="tomorrow" data-prio="urgent"> Study for the midterm</p>
+    </section>
+
+
+
+
+
   </main>
+  <footer>
+    <p class="todos">Copyrignt 2014</p>
+  </footer>
 </body>
 </html>

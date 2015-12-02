@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  width: 80%;
+  width: 90%;
   margin: auto;
   margin-top: 80px;
 }
@@ -42,4 +42,38 @@ button {
 .subtitle {
   width: 100%;
   text-align: center;
+  background-color: red;
+}
+
+.headerbutton{
+background-color: red;
+
+}
+
+/*#s1{
+  bottom:10px;
+  right:20px;
+  position:align-right;
+}
+p:nth-child(1){
+  background-color: red;
+  }
+p:nth-of-type(2){
+  background-color: gray;
+}
+main::before{
+  content:"+++++";
+}
+main ::after{
+  content:"+++++";
+}
+p:not(.todosHome .todosUni)::before{
+  content:attr(data-due) "/" attr(data-prio) ":";
+  color:green;
+}*/
+section p {
+  background-color: red;
+}
+footer{
+  background-color: orange;
 }

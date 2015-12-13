@@ -1,0 +1,117 @@
+
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}
+
+header {
+  width: 100%;
+  height:200%;
+  margin: auto;
+  margin-top: 40px;
+}
+header button{
+	border:none;
+}
+
+main button {
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  border-width: 0;
+ 
+  font-size: 8px;
+  background-color: #6294D3;
+  color: #eee1;
+  position:relative;
+  top:100%;
+  left:10px;
+}
+
+main{
+ border-radius: 5px;
+  border-width: 0;
+  position:relative;
+  top:100%;
+}
+
+
+
+.title {
+  
+ 
+margin: auto;
+  position:absolute;
+  left:1000px;
+  bottom:500px;
+   
+}
+
+.title img {
+  width: 60%;
+  height:170%;
+ 
+}
+
+.subtitle {
+  width: 100%;
+  text-align: center;
+  position:relative;
+  left:20px;
+  bottom:50px;
+
+}
+button:hover {
+    color: red;
+}
+a{
+	background-color:lightblue;
+	position:relative;
+	
+}
+#search_box { 
+width: 201px; 
+height: 31px; 
+background: url(http://files.jb51.net/demoimg/200912/bg_search_box.gif); 
+position:absolute;
+top:500px;
+left:30px;
+} 
+#search_box #s { 
+float: left; 
+padding: 0; 
+margin: 6px 0 0 6px; 
+border: 0; 
+width: 159px; 
+background: none; 
+font-size: .8em; 
+} 
+#search_box #go { 
+float: right; 
+margin: 3px 4px 0 0; 
+} 
+.deadline{
+	height:130px;
+	width:90px;
+	color:red;
+	border:3px solid red;
+	position:absolute;
+	left:600px;
+	bottom:2px;
+	background-color:lightblue;
+}
+.group{
+	height:260px;
+	width:180px;
+	color:purple;
+	border:3px solid gray;
+	position:absolute;
+	left:300px;
+	bottom:1px;
+	background-color:lightblue;
+	
+}
+.important

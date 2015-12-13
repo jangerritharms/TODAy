@@ -5,20 +5,42 @@
   <title>TODAy</title>
   <script type="text/javascript" src="./javascript/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="./javascript/script.js" ></script>
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./css/todopage.css" type="text/css">
 </head>
 <body>
   <header>
     <a href="./FrontPage.html">Home</a>
+	<div class="title">
+      <img src="./images/logo_new_large.png" alt="TODAy">
+    </div>
     <button class="header-button">Settings</button>
     <button id="sort_by_date">Sort by deadline</button>
     <button id="sort_by_importance">Sort by importance</button>
-    <input type="text" name="search">
+    <div id="search_box"> 
+		<form id="search_form" method="post" action="#"> 
+		<input type="text" id="s" value="Search" class="swap_value" /> 
+		<input type="image" src="http://files.jb51.net/demoimg/200912/btn_search_box.gif" width="27" height="24" id="go" alt="Search" title="Search" /> 
+		</form>
+	</div>
   </header>
   <main>
+    <p></p>
     <button id="main-add">Add</button>
-    <button class="hidden add-todo-list">Add todo-list</button>
-    <button class="hidden add-todo-item">Add todo-item</button>
+    <p><button class="hidden add-todo-list">Add todo-list</button></p>
+    <p><button class="hidden add-todo-item">Add todo-item</button></p>
     <button class="hidden add-shared-list">Add shared list</button>
+	<section class=finished> overdue
+	</section>
+	<section class=deadline> Deadline
+	</section>
+	<section class=success> success
+	</section>
+	<section class=important> important
+	</section>
+	<section class=group> goup assignment
+	</section>
+	
   </main>
 </body>
 </html>

@@ -14,6 +14,10 @@ function deleteTodo(el) {
   el.remove();
 }
 
+function showSettings(el) {
+  el.children('.todo-content').first().toggleClass('hidden');
+}
+
 // Main function executed on page reload
 function main() {
   var data_id = 0;
@@ -25,24 +29,33 @@ function main() {
 
     // to create Todo from existing todo
     if (typeof existing !== undefined && existing['todo-id'] !== undefined) {
-      alert("hello World");
       id = existing['todo-id'];
       title = existing['title'];
     }
 
     var emptyTodo = $('<section>', {class: 'group', "todo-id": id});
     emptyTodo.append($('<button>', {class: 'delete-button'}));
-    emptyTodo.append($('<h2>', {contenteditable: 'true'}).text(title));
-    emptyTodo.append($('<div>', {contenteditable: 'true'}));
-    emptyTodo.on('keypress', function(e){
+    emptyTodo.append($('<button>', {class: 'settings-button'}));
+    var content = $('<div>', {class: 'todo-content'});
+    content.append($('<h2>', {contenteditable: 'true'}).text(title));
+    content.append($('<div>', {contenteditable: 'true'}));
+    var settings = $('<div>', {class: 'todo-settings hidden'});
+    settings.append($('<form>Deadline: <input type="datetime" name="deadline"></form>'));
+    settings.append($('<form>Add tag: <input type="text" name="tag"></form>'));
+    content.on('keypress', function(e){
       if (e.which == 13) {
         e.preventDefault();
         $(this).blur().next().focus();
         updateTodo($(this));
       }
     });
+    emptyTodo.append(content);
+    emptyTodo.append(settings);
     emptyTodo.children(".delete-button").first().on('click', function() {
       deleteTodo($(this).parent());
+    });
+    emptyTodo.children(".settings-button").first().on('click', function() {
+      showSettings($(this).parent());
     });
     // to create Todo from existing todo
     if (typeof existing == undefined || existing['todo-id'] == undefined) {
@@ -73,6 +86,9 @@ function main() {
 
   $("#main-add").on("click", createTodo);
   updateAllTodos();
+  setInterval(function () {
+    updateAllTodos();
+  }, 2000);
 }
 
 $(document).ready(main);

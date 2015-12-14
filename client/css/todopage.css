@@ -13,6 +13,7 @@ header {
   margin: auto;
   margin-top: 40px;
 }
+
 header button{
 	border:none;
 }
@@ -22,7 +23,7 @@ main button {
   height: 30px;
   border-radius: 5px;
   border-width: 0;
- 
+
   font-size: 8px;
   background-color: #6294D3;
   color: #eee1;
@@ -38,22 +39,16 @@ main{
   top:100%;
 }
 
-
-
 .title {
-  
- 
-margin: auto;
+  margin: auto;
   position:absolute;
   left:1000px;
   bottom:500px;
-   
 }
 
 .title img {
   width: 60%;
   height:170%;
- 
 }
 
 .subtitle {
@@ -62,37 +57,42 @@ margin: auto;
   position:relative;
   left:20px;
   bottom:50px;
-
 }
+
 button:hover {
     color: red;
 }
+
 a{
 	background-color:lightblue;
 	position:relative;
-	
+
 }
-#search_box { 
-width: 201px; 
-height: 31px; 
-background: url(http://files.jb51.net/demoimg/200912/bg_search_box.gif); 
+
+#search_box {
+width: 201px;
+height: 31px;
+background: url(http://files.jb51.net/demoimg/200912/bg_search_box.gif);
 position:absolute;
 top:500px;
 left:30px;
-} 
-#search_box #s { 
-float: left; 
-padding: 0; 
-margin: 6px 0 0 6px; 
-border: 0; 
-width: 159px; 
-background: none; 
-font-size: .8em; 
-} 
-#search_box #go { 
-float: right; 
-margin: 3px 4px 0 0; 
-} 
+}
+
+#search_box #s {
+float: left;
+padding: 0;
+margin: 6px 0 0 6px;
+border: 0;
+width: 159px;
+background: none;
+font-size: .8em;
+}
+
+#search_box #go {
+float: right;
+margin: 3px 4px 0 0;
+}
+
 .deadline{
 	height:130px;
 	width:90px;
@@ -104,14 +104,22 @@ margin: 3px 4px 0 0;
 	background-color:lightblue;
 }
 .group{
+  display: inline-block;
 	height:260px;
 	width:180px;
 	color:purple;
 	border:3px solid gray;
-	position:absolute;
-	left:300px;
-	bottom:1px;
+	position:relative;
 	background-color:lightblue;
-	
+
 }
-.important
+.delete-button{
+  position: absolute;
+  width: 15px;
+  height:15px;
+  border-radius: 15px;
+  background-color: red;
+  right: -10px;
+  top: 3px;
+  left: auto;
+}

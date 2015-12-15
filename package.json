@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jangerritharms/TODAy#readme",
   "dependencies": {
-      "express": "latest"
+    "express": "latest",
+    "mysql": "^2.9.0"
   }
 }

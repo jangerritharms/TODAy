@@ -26,13 +26,13 @@ var app = express();
 app.use(express.static(__dirname + "/client"));
 http.createServer(app).listen(port);
 
-var todos = [];
-var t1 = {"todo-id" : "0", title: "HelloWorld", desc: "", deadline : "12/12/2015", completed: "false", completion_date: "undefined"};
-todos.push(t1);
-
 //clients requests todos
 app.get("/gettodos", function (req, res) {
-  res.json(todos);
+  con.query('SELECT * FROM ToDoItem Where Priority = 1',function(err,rows){
+    if(err) throw err;
+
+    res.json(rows);
+  });
 });
 
 // Show todo page
@@ -52,23 +52,29 @@ app.get("/addtodo", function (req, res) {
   var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 
-  if (query["todo-id"]!==undefined) {
-    var new_todo = {
-      "todo-id": query["todo-id"],
-      "title": query["title"],
-      "desc": query["desc"],
-      "deadline": query["deadline"],
-      "completed": query["completed"],
-      "completion_date": query["completion_date"]
-    }
-    todos.push(new_todo);
-    res.end("Succes");
+  console.log(query);
+
+  if (query["Priority"]!==undefined) {
+    var new_todo = {Id: query['Id'],
+                    Title: query['Title'],
+                    Text: query['Text'],
+                    CreationDate: query['CreationDate'],
+                    DueDate: query['DueDate'],
+                    Completed: query['Completed'],
+                    CompletionDate: query['CompletionDate'],
+                    Priority: query['Priority'],
+                    ToDoListID: query['ToDoListID'],
+                    ParentToDo: query['ParentToDo']
+    };
+    con.query('INSERT INTO ToDoItem SET ?', new_todo, function(err,result){
+      if(err) throw err;
+
+      res.end(result.insertId.toString());
+    });
   }
   else {
     res.end("Failure");
   }
-
-  console.log(todos);
 });
 
 // Update an existing object in the databse
@@ -76,29 +82,26 @@ app.get("/updatetodo", function(req, res) {
   var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 
-  if (query["todo-id"]!==undefined) {
-    var lookup = {};
-    for (var i = 0, len = todos.length; i < len; i++) {
-      if (todos[i]['todo-id'] == query['todo-id'])
-        lookup = todos[i];
-    }
-    if (lookup.length !== 0) {
-      for (var property in query) {
-        if (query.hasOwnProperty(property)) {
-          console.log("Updated property: " + property);
-          lookup[property] = query[property];
+  if (query["Id"]!==undefined) {
+    for (var property in query) {
+      // because of http query string null or undefined are converted to empty string/no passed at all
+      if (query[property] == '')
+        query[property] = undefined;
+      
+      con.query(
+        'UPDATE ToDoItem SET '+property+' = ? Where Id = ?',
+        [query[property], query['Id']],
+        function (err, result) {
+          if (err) throw err;
+          console.log('Changed ' + result.changedRows + ' rows');
         }
-      }
-    }
-    else {
-      res.end("Object not in database");
+      );
     }
     res.end("Succes");
   }
   else {
     res.end("Failure");
   }
-  console.log(todos);
 });
 
 // Delete a todo
@@ -107,17 +110,18 @@ app.get("/deletetodo", function (req, res) {
   var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 
-  if (query["todo-id"]!==undefined) {
-    for (var i = 0; i < todos.length; i++) {
-      if (todos[i]['todo-id'] === query['todo-id']) {
-        todos.splice(i, 1);
-        i--;
+  if (query["Id"]!==undefined) {
+    con.query(
+      'DELETE FROM ToDoItem WHERE Id = ?',
+      [query["Id"]],
+      function (err, result) {
+        if (err) throw err;
+
+        console.log('Deleted ' + result.affectedRows + ' rows');
       }
-    }
-    res.end("Succes");
+    );
   }
   else {
     res.end("Failure");
   }
-  console.log(todos);
 });

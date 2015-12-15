@@ -1,17 +1,23 @@
 // Add a new (empty) todo to the server list
 function addTodo(el) {
-  $.get("/addtodo", {"todo-id": el.attr("todo-id")});
+  var new_id;
+  $.get("/addtodo", {Priority: 1})
+    .done(function (id) {
+      new_id = id;
+      el.attr("todo-id", id);
+    });
+  return new_id;
 }
 
 // Update the data in the todo on the server
 function updateTodo(el, data) {
-  data["todo-id"] = el.attr("todo-id");
-  $.get("/updatetodo", data);//{"todo-id": el.attr("todo-id"), title: el.children("h2").first().text()});
+  data["Id"] = el.attr("todo-id");
+  $.get("/updatetodo", data);
 }
 
 // Delete a todo item
 function deleteTodo(el) {
-  $.get("/deletetodo", {"todo-id": el.attr("todo-id")});
+  $.get("/deletetodo", {Id: el.attr("todo-id")});
   el.remove();
 }
 
@@ -23,26 +29,24 @@ function showSettings(el) {
 
 // Main function executed on page reload
 function main() {
-  var data_id = 0;
-
   // function to create a new todo
   function createTodo(existing) {
-    var id = data_id;
+    var id = -1;
     var title = "New Todo";
     var desc = "";
     var date = undefined;
     var completed = "false";
 
     // to create Todo from existing todo
-    if (typeof existing !== undefined && existing['todo-id'] !== undefined) {
-      id = existing['todo-id'];
-      title = existing['title'];
-      desc = existing['desc'];
-      date = new Date(existing["deadline"]).toISOString().substr(0,10);
-      completed = existing["completed"];
+    if (typeof existing !== undefined && existing['Id'] !== undefined) {
+      id = existing['Id'];
+      title = existing['Title'];
+      desc = existing['Text'];
+      date = new Date(existing["DueDate"]).toISOString().substr(0,10);
+      completed = existing["Completed"];
     }
 
-    var emptyTodo = $('<section>', {class: 'group', "todo-id": id});
+    var emptyTodo = $('<section>', {class: 'group'});
     var b_delete = $('<button>', {class: 'delete-button'});
     var b_settings = $('<button>', {class: 'settings-button'});
     var b_completed = $('<button>', {class: 'completed-button'});
@@ -53,24 +57,30 @@ function main() {
     var date_picker = $('<form>Deadline: <input type="date" name="deadline"></form>');
     var tagger = $('<form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>');
     date_picker.children("input").first().val(date);
-    if (completed == "true") {
+    if (completed == 1) {
       emptyTodo.addClass("completed");
+    }
+    if (id !== -1) {
+      emptyTodo.attr('todo-id', id);
     }
     header.on('keypress', function(e){
       if (e.which == 13) {
         e.preventDefault();
         $(this).blur();
-        updateTodo($(this).parent().parent(), {title: $(this).text()});
+        updateTodo($(this).parent().parent(), {Title: $(this).text()});
       }
     });
+    header.on('blur', function(e) {
+      updateTodo($(this).parent().parent(), {Title: $(this).text()});
+    });
     desc.on('blur', function(e) {
-      updateTodo($(this).parent().parent(), {desc: $(this).text()});
+      updateTodo($(this).parent().parent(), {Text: $(this).text()});
     });
     settings.on('keypress', function(e) {
       return e.which !== 13;
     });
     date_picker.children("input").first().change(function(e) {
-      updateTodo($(this).parents("section").first(), {deadline: $(this).val()});
+      updateTodo($(this).parents("section").first(), {DueDate: $(this).val()});
     });
     tagger.children("input").first().on('keypress', function(e) {
       if (e.which == 13) {
@@ -85,8 +95,14 @@ function main() {
       showSettings($(this).parent());
     });
     b_completed.on('click', function() {
+      if ($(this).parent().hasClass("completed")) {
+        updateTodo($(this).parent(), {Completed: 0, CompletionDate: null});
+      }
+      else {
+        updateTodo($(this).parent(), {Completed: 1, CompletionDate: new Date().toISOString().substr(0,10)});
+      }
       $(this).parent().toggleClass("completed");
-      updateTodo($(this).parent(), {completed: true, completion_date: new Date().toLocaleString()});
+
     });
     emptyTodo.append(b_delete);
     emptyTodo.append(b_completed);
@@ -99,33 +115,32 @@ function main() {
     emptyTodo.append(settings);
 
     // to create Todo from existing todo
-    if (typeof existing == undefined || existing['todo-id'] == undefined) {
-      addTodo(emptyTodo);
+    if (typeof existing == undefined || existing['Id'] == undefined) {
+      id = addTodo(emptyTodo);
+      $("main").append(emptyTodo);
+      $(".group[todo-id="+id+"]").find("h2").first().focus();
     }
-    $("main").append(emptyTodo);
+    else
+      $("main").append(emptyTodo);
 
-    // Increase data_id for the next todo_item
-    data_id++;
   }
 
   // Get todos from database on server
   function updateAllTodos() {
     $.get("/gettodos", function (data) {
       $.each(data, function (_, todo_item) {
-        var todo = $(".group[todo-id="+todo_item["todo-id"]+"]");
+        var todo = $(".group[todo-id="+todo_item["Id"]+"]");
         if (todo.length > 0) {
-          todo.children("h2").first().html(todo_item["title"]);
-          todo.children(".todo-description div").first().html(todo_item["desc"]);
-          todo.find("input[name='deadline']").val(new Date(todo_item["deadline"]).toISOString().substr(0,10));;
-          if (todo_item['completed'] === 'true') {
+          todo.children("h2").first().html(todo_item["Title"]);
+          todo.children(".todo-description div").first().html(todo_item["Text"]);
+          todo.find("input[name='deadline']").val(new Date(todo_item["DueDate"]).toISOString().substr(0,10));;
+          if (todo_item['Completed'] === 1) {
             todo.addClass("completed");
           }
         }
         else {
           createTodo(todo_item);
         }
-        if (todo_item['todo-id'] > data_id)
-          data_id = todo_item['todo-id'] + 1;
       });
     });
   }

@@ -366,10 +366,93 @@ app.get("/todosCompletedByWeek", function (req, res) {
 
   con.query(
     'select WEEK(CreationDate) as week, count(*) as completed from ToDoItem where Completed=1 and YEAR(CreationDate) = YEAR(CURDATE()) group by WEEK(CreationDate);',
+    [],
+    function (err, rows) {
+      if (err) throw err;
+      res.json(rows);
+    }
+  );
+});
+
+// Query10
+// Show amount of tasks completed for each week of the year
+app.get("/todosCompletionTime", function (req, res) {
+  console.log(req.url);
+  var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+  if (query["TagId"]) {
+    con.query(
+      'SELECT *, TIMESTAMPDIFF(SECOND, CreationDate,CompletionDate) as time from ToDoItem, ItemTag where completed=1 and ItemTag.TagId=? and ToDoItem.Id = ItemTag.ToDoId order by TagId,time limit 10;',
+      [query["TagId"]],
+      function (err, rows) {
+        if (err) throw err;
+        res.json(rows);
+      }
+    );
+  }
+  else {
+    res.end("Failure");
+  }
+
+});
+
+// Query11
+// Show number of co-occurring tags
+app.get("/todosTagFrequency", function (req, res) {
+  console.log(req.url);
+  var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+
+  con.query(
+    'select a.TagId as Tag1, b.TagId as Tag2, count(*) as amount from ToDoItem, ItemTag as a, ItemTag as b where ToDoItem.Id = a.TodoId and a.TagId > b.TagId and ToDoItem.Id = b.TodoId group by a.TagId, b.TagId;',
     [query["TagId"]],
     function (err, rows) {
       if (err) throw err;
       res.json(rows);
     }
   );
+});
+
+// Query12
+// Show number of co-occurring tags
+app.get("/todosAverageCompletion", function (req, res) {
+  console.log(req.url);
+  var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+
+  if (query["ListId"]) {
+    con.query(
+      'select avg(TIMESTAMPDIFF(SECOND,CreationDate,CompletionDate)) as AvgCompletionTime from ToDoItem where ToDoItem.TodoListId = ? and Completed=1;',
+      [query["ListId"]],
+      function (err, rows) {
+        if (err) throw err;
+        res.json(rows);
+      }
+    );
+  }
+  else {
+    res.end("Failure");
+  }
+});
+
+// Query13
+// Completion time larger than average
+app.get("/todosLongCompletion", function (req, res) {
+  console.log(req.url);
+  var url_parts = url.parse(req.url, true);
+	var query = url_parts.query;
+
+  if (query["ListId"]) {
+    con.query(
+      'select * from todoitem where completed=1 and todolistid=? and timestampdiff(second,creationdate,completiondate) > (select avg(timestampdiff(second, creationdate, completiondate)) from todoitem where todolistid=?);',
+      [query["ListId"], query["ListId"]],
+      function (err, rows) {
+        if (err) throw err;
+        res.json(rows);
+      }
+    );
+  }
+  else {
+    res.end("Failure");
+  }
 });

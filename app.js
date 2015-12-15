@@ -7,8 +7,8 @@ var mysql = require("mysql");
 // First you need to create a connection to the db
 var con = mysql.createConnection({
   host: "localhost",
-  user: "pracuser",
-  password: "webtech",
+  user: "root",
+  password: "webdata",
   database: "todo"
 });
 

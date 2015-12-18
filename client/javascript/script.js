@@ -2,7 +2,7 @@
 function addTodo(el) {
   var new_id;
   $.get("/addtodo", {Priority: 1,
-                                 CreationDate: new Date().toISOString().substr(0,10)})
+                     CreationDate: new Date().toISOString().substr(0,10)})
     .done(function (id) {
       new_id = id;
       el.attr("todo-id", id);
@@ -57,6 +57,7 @@ function main() {
     var settings = $('<div>', {class: 'todo-settings hidden'});
     var date_picker = $('<form>Deadline: <input type="date" name="deadline"></form>');
     var tagger = $('<form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>');
+    var priority = $('<form>Importance<br><input type="radio" name="importance" value="1" checked>1<input type="radio" name="importance" value="2">2<input type="radio" name="importance" value="3">3</form>')
     date_picker.children("input").first().val(date);
     if (completed == 1) {
       emptyTodo.addClass("completed");
@@ -82,6 +83,9 @@ function main() {
     });
     date_picker.children("input").first().change(function(e) {
       updateTodo($(this).parents("section").first(), {DueDate: $(this).val()});
+    });
+    priority.children("input").click(function(e) {
+      updateTodo($(this).parents("section").first(), {Priority: $(this).val()});
     });
     tagger.children("input").first().on('keypress', function(e) {
       if (e.which == 13) {
@@ -110,6 +114,7 @@ function main() {
     emptyTodo.append(b_settings);
     settings.append(date_picker);
     settings.append(tagger);
+    settings.append(priority);
     content.append(header);
     content.append(desc);
     emptyTodo.append(content);

@@ -44,7 +44,7 @@ function getTagCoocurrence(el) {
 
 function main() {
   getCompletionTime(1);
-  getTagCoocurrence($("#tag-frequency"));
+  getTagCoocurrence($("#tag-frequency .bar-chart"));
 }
 
 $(document).ready(main);

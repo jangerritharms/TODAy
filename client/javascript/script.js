@@ -37,6 +37,7 @@ function main() {
     var desc = "";
     var date = undefined;
     var completed = "false";
+    var pri = 1;
 
     // to create Todo from existing todo
     if (typeof existing !== undefined && existing['Id'] !== undefined) {
@@ -45,6 +46,7 @@ function main() {
       desc = existing['Text'];
       date = new Date(existing["DueDate"]).toISOString().substr(0,10);
       completed = existing["Completed"];
+      pri = existing["Priority"];
     }
 
     var emptyTodo = $('<section>', {class: 'group'});
@@ -65,6 +67,7 @@ function main() {
     if (id !== -1) {
       emptyTodo.attr('todo-id', id);
     }
+    emptyTodo.attr('data-priority', pri);
     header.on('keypress', function(e){
       if (e.which == 13) {
         e.preventDefault();
@@ -86,6 +89,7 @@ function main() {
     });
     priority.children("input").click(function(e) {
       updateTodo($(this).parents("section").first(), {Priority: $(this).val()});
+      $(this).parents("section").attr('data-priority', $(this).val());
     });
     tagger.children("input").first().on('keypress', function(e) {
       if (e.which == 13) {

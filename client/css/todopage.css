@@ -102,15 +102,20 @@ margin: 3px 4px 0 0;
   margin: 20px;
 }
 
+.group[data-priority="1"] {
+  border:3px solid white;
+}
+
+.group[data-priority="2"] {
+  border:3px solid yellow;
+}
+
+.group[data-priority="3"] {
+  border:3px solid orange;
+}
+
 .completed {
-  float: left;
-	height:260px;
-	width:180px;
-	color:purple;
-	border:3px solid Lawngreen;
-	position:relative;
-	background-color:lightblue;
-  margin: 20px;
+	border:3px solid Lawngreen !important;
 }
 
 .delete-button{

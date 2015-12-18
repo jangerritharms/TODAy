@@ -33,6 +33,10 @@ button {
 -webkit-animation:myfirst 5s infinite; /* Safari and Chrome */
 }
 
+button::before {
+  content: ">"
+}
+
 @keyframes myfirst
 {
 0%   {background-color:#6294D3;}

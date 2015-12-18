@@ -393,7 +393,6 @@ app.get("/todosCompletionTime", function (req, res) {
   else {
     res.end("Failure");
   }
-
 });
 
 // Query11

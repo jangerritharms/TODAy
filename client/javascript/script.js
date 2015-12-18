@@ -1,7 +1,8 @@
 // Add a new (empty) todo to the server list
 function addTodo(el) {
   var new_id;
-  $.get("/addtodo", {Priority: 1})
+  $.get("/addtodo", {Priority: 1,
+                                 CreationDate: new Date().toISOString().substr(0,10)})
     .done(function (id) {
       new_id = id;
       el.attr("todo-id", id);

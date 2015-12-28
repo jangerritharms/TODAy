@@ -3,6 +3,12 @@ var express = require("express");
 var url = require("url");
 var http = require("http");
 var mysql = require("mysql");
+var passport = require("passport");
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
+var ejs = require("ejs");
+
+require("./config/passport")(passport);
 
 // First you need to create a connection to the db
 var con = mysql.createConnection({
@@ -23,7 +29,11 @@ con.connect(function(err){
 
 var port = 3000;
 var app = express();
+app.use(cookieParser());
 app.use(express.static(__dirname + "/client"));
+app.use(session({secret: 'twitterLogin'}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 http.createServer(app).listen(port);
 
 //clients requests todos
@@ -36,7 +46,8 @@ app.get("/gettodos", function (req, res) {
 });
 
 // Show todo page
-app.get("/todo", function (req, res) {
+app.get("/todo", isLoggedIn, function (req, res) {
+  console.log(req.user);
 	console.log("Todo page requested");
   res.sendFile(__dirname+"/client/todo.html");
 });
@@ -44,8 +55,35 @@ app.get("/todo", function (req, res) {
 // Show entry page
 app.get("/", function (req, res) {
   console.log("Front page requested!");
-  res.sendFile("/index.html")
-})
+  res.sendFile("/index.html");
+});
+
+// =====================================
+// TWITTER ROUTES ======================
+// =====================================
+// route for twitter authentication and login
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+// handle the callback after twitter has authenticated the user
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', {
+      successRedirect : '/todo',
+      failureRedirect : '/'
+  })
+);
+
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
 
 //add todo to the server
 app.get("/addtodo", function (req, res) {

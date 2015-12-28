@@ -50,7 +50,14 @@ app.get("/gettodos", function (req, res) {
 app.get("/todo", isLoggedIn, function (req, res) {
   console.log(req.user);
 	console.log("Todo page requested");
-  res.render("todo");
+  con.query('SELECT * FROM ToDoItem Where Priority = 1',function(err,rows){
+    if(err) throw err;
+
+    res.render("todo", {
+      todos: rows
+    });
+  });
+
 });
 
 // Show entry page

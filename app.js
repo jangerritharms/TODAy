@@ -29,6 +29,7 @@ con.connect(function(err){
 
 var port = 3000;
 var app = express();
+app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(express.static(__dirname + "/client"));
 app.use(session({secret: 'twitterLogin'}));
@@ -49,14 +50,19 @@ app.get("/gettodos", function (req, res) {
 app.get("/todo", isLoggedIn, function (req, res) {
   console.log(req.user);
 	console.log("Todo page requested");
-  res.sendFile(__dirname+"/client/todo.html");
+  res.render("todo");
 });
 
 // Show entry page
 app.get("/", function (req, res) {
   console.log("Front page requested!");
-  res.sendFile("/index.html");
+  res.render("index");
 });
+
+app.get("/dashboard", function(req, res) {
+  console.log("Dashboard page requested!");
+  res.render("dashboard");
+})
 
 // =====================================
 // TWITTER ROUTES ======================

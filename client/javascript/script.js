@@ -54,8 +54,8 @@ function main() {
     var b_settings = $('<button>', {class: 'settings-button'});
     var b_completed = $('<button>', {class: 'completed-button'});
     var content = $('<div>', {class: 'todo-description'});
-    var header = $('<h2>', {contenteditable: 'true'}).text(title);
-    var desc = $('<div>', {contenteditable: 'true'}).text(desc);
+    var header = $('<h2>', {contenteditable: 'true', 'data-placeholder': 'Add Title'}).text(title);
+    var desc = $('<div>', {contenteditable: 'true', 'data-placeholder': 'Add description'}).text(desc);
     var settings = $('<div>', {class: 'todo-settings hidden'});
     var date_picker = $('<form>Deadline: <input type="date" name="deadline"></form>');
     var tagger = $('<form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>');

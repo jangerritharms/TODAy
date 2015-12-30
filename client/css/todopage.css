@@ -18,12 +18,21 @@ header {
 }
 
 header * {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.logo-container {
-  text-decoration: none;
+header .btn {
+  width: 70%;
+  box-sizing: border-box;
+}
+
+.header-content {
+  margin-bottom: 110px;
+}
+
+.header-content h1 {
+  color: #00917F;
 }
 
 #logo {
@@ -31,7 +40,7 @@ header * {
   vertical-align: middle;
 }
 
-.search_form {
+.logo-container {
   display: block;
   position: absolute;
   bottom: 20px;
@@ -39,15 +48,27 @@ header * {
   left: 10%;
 }
 
-input {
+form {
   background-color: transparent;
   color: #ebeff0;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 15px;
+  width: 70%;
   padding: 6px 12px;
   font-weight: 300;
   border: 1px solid;
   border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+input {
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 
 input[type="radio"] {
@@ -56,34 +77,31 @@ input[type="radio"] {
 
 .radio-form {
   font-size: 0;
+  padding: 0;
+  width: 70%;
 }
 
 input + label {
+  margin: 0;
+  padding: 11px 6px;
+  width: 33.3333%;
   display: inline-block;
   background-color: transparent;
   color: #ebeff0;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  padding: 6px 12px;
+  font:normal normal normal 14px/1 FontAwesome;
+  font-size: 15px;
   font-weight: 300;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-left: 1px solid;
+  border-right: 1px solid;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 input:checked + label {
   background-color: rgba(255,255,255,0.4);
 }
 
-label:first-of-type {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
 label:last-of-type {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-right: 1px solid;
+  border-right: 0;
 }
 
 
@@ -119,13 +137,13 @@ hr {
   display: inline-block;
   padding: 6px 12px;
   font-weight: 300;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   vertical-align: middle;
   border: 1px solid #ebeff0;
   border-radius: 4px;
   color: #ebeff0;
-  font-size: 20px;
+  font-size: 15px;
   text-decoration: none;
   cursor: pointer;
 }

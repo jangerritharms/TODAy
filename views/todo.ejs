@@ -11,30 +11,27 @@
 </head>
 <body>
   <header>
-    <div class="general">
-      <a href="/" class="logo-container">
-        <img id="logo" src="/images/Today-logo.png" alt="TODAy">
-      </a>
+    <div class="header-content general">
       <div class="profile-info">
         <img id="profile-image" src=<%= user.photos[0].value%> ><br>
         <p><%= user.displayName %></p>
       </div>
       <hr>
-      <a class="btn" id="main-add">
-        <span>Add</span>
-      </a>
       <form class="search_form" method="post" action="#">
-        <input type="text" class="search" placeholder="Search"/>
+        <input type="text" class="search fa" placeholder="&#xf002; Search"/>
       </form>
+      <a class="btn" id="main-add">
+        <span class="fa fa-plus"> Add new todo item</span>
+      </a>
     </div>
-    <div class="todo-settings-main hidden">
+    <div class="header-content todo-settings-main hidden">
       <h1>Todo</h1>
       <hr>
-      <h3>Deadline: </h3>
+      <h4>Deadline: </h4>
       <form><input type="date" name="deadline"></form>
-      <h3>Add tag: </h3>
-      <form><input type="text" placeholder="new tag" name="tag"></form>
-      <h3>Importance: </h3>
+      <h4>Add tag: </h4>
+      <form><input type="text" class="fa" placeholder="&#xf02b; Add tag" name="tag"></form>
+      <h4>Importance: </h4>
       <form class="radio-form"><input type="radio" name="importance" id="i1" value="1" />
         <label for="i1">low</label>
         <input type="radio" name="importance" id="i2" value="2" />
@@ -43,6 +40,9 @@
         <label for="i3">high</label>
       </form>
     </div>
+    <a href="/" class="logo-container">
+      <img id="logo" src="/images/Today-logo.png" alt="TODAy">
+    </a>
   </header>
   <main>
     <div class="content">

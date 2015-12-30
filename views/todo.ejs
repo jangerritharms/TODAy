@@ -28,12 +28,19 @@
       </form>
     </div>
     <div class="todo-settings-main hidden">
-      <form>Deadline: <input type="date" name="deadline"></form>
-      <form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>
-      <form>Importance<br>
-        <input type="radio" name="importance" value="1" >1
-        <input type="radio" name="importance" value="2" >2
-        <input type="radio" name="importance" value="3" >3
+      <h1>Todo</h1>
+      <hr>
+      <h3>Deadline: </h3>
+      <form><input type="date" name="deadline"></form>
+      <h3>Add tag: </h3>
+      <form><input type="text" placeholder="new tag" name="tag"></form>
+      <h3>Importance: </h3>
+      <form class="radio-form"><input type="radio" name="importance" id="i1" value="1" />
+        <label for="i1">low</label>
+        <input type="radio" name="importance" id="i2" value="2" />
+        <label for="i2">medium</label>
+        <input type="radio" name="importance" id="i3" value="3" />
+        <label for="i3">high</label>
       </form>
     </div>
   </header>
@@ -42,21 +49,16 @@
       <% todos.forEach(function(todo) { %>
           <section class="widget widget-col-1 <%if (todo.Completed == '1') {%>completed<%}%>" todo-id=<%= todo.Id %> data-priority=<%= todo.Priority %> >
             <div class="control-area">
-              <span class="control-button delete fa fa-close"></span>
-              <span class="control-button complete fa fa-check"></span>
+              <a class="btn btn-control">
+                <span class="control-button delete fa fa-close"></span>
+              </a>
+              <a class="btn btn-control">
+                <span class="control-button complete fa fa-check"></span>
+              </a>
             </div>
             <div class="todo-description">
               <h2 contenteditable="true" data-placeholder="Add Title"><%= todo.Title %></h2>
               <div contenteditable="true" data-placeholder="Add description"><%= todo.Text %></div>
-            </div>
-            <div class="todo-settings hidden">
-              <form>Deadline: <input type="date" name="deadline" value=<%= new Date(todo.DueDate).toISOString().substr(0,10) %>></form>
-              <form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>
-              <form>Importance<br>
-                <input type="radio" name="importance" value="1" <%if (todo.Priority == '1') {%>checked<%}%>>1
-                <input type="radio" name="importance" value="2" <%if (todo.Priority == '2') {%>checked<%}%>>2
-                <input type="radio" name="importance" value="3" <%if (todo.Priority == '3') {%>checked<%}%>>3
-              </form>
             </div>
           </section>
       <% }); %>

@@ -6,41 +6,61 @@
   <script type="text/javascript" src="/javascript/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="/javascript/script.js" ></script>
   <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/todopage.css" type="text/css">
 </head>
 <body>
   <header>
-    <a href="/" class="logo-container">
-      <img id="logo" src="/images/logo_transparent.png" alt="TODAy">
-    </a>
-    <form class="search_form" method="post" action="#">
-      <input type="text" class="search" placeholder="Search"/>
-    </form>
+    <div class="general">
+      <a href="/" class="logo-container">
+        <img id="logo" src="/images/Today-logo.png" alt="TODAy">
+      </a>
+      <div class="profile-info">
+        <img id="profile-image" src=<%= user.photos[0].value%> ><br>
+        <p><%= user.displayName %></p>
+      </div>
+      <hr>
+      <a class="btn" id="main-add">
+        <span>Add</span>
+      </a>
+      <form class="search_form" method="post" action="#">
+        <input type="text" class="search" placeholder="Search"/>
+      </form>
+    </div>
+    <div class="todo-settings-main hidden">
+      <form>Deadline: <input type="date" name="deadline"></form>
+      <form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>
+      <form>Importance<br>
+        <input type="radio" name="importance" value="1" >1
+        <input type="radio" name="importance" value="2" >2
+        <input type="radio" name="importance" value="3" >3
+      </form>
+    </div>
   </header>
   <main>
-    <% todos.forEach(function(todo) { %>
-        <section class="group <%if (todo.Completed == '1') {%>completed<%}%>" todo-id=<%= todo.Id %> data-priority=<%= todo.Priority %> >
-          <button class="delete-button"></button>
-          <button class="completed-button"></button>
-          <button class="settings-button"></button>
-          <div class="todo-description">
-            <h2 contenteditable="true" data-placeholder="Add Title"><%= todo.Title %></h2>
-            <div contenteditable="true" data-placeholder="Add description"><%= todo.Text %></div>
-          </div>
-          <div class="todo-settings hidden">
-            <form>Deadline: <input type="date" name="deadline" value=<%= new Date(todo.DueDate).toISOString().substr(0,10) %>></form>
-            <form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>
-            <form>Importance<br>
-              <input type="radio" name="importance" value="1" <%if (todo.Priority == '1') {%>checked<%}%>>1
-              <input type="radio" name="importance" value="2" <%if (todo.Priority == '2') {%>checked<%}%>>2
-              <input type="radio" name="importance" value="3" <%if (todo.Priority == '3') {%>checked<%}%>>3
-            </form>
-          </div>
-        </section>
-    <% }); %>
+    <div class="content">
+      <% todos.forEach(function(todo) { %>
+          <section class="widget widget-col-1 <%if (todo.Completed == '1') {%>completed<%}%>" todo-id=<%= todo.Id %> data-priority=<%= todo.Priority %> >
+            <div class="control-area">
+              <span class="control-button delete fa fa-close"></span>
+              <span class="control-button complete fa fa-check"></span>
+            </div>
+            <div class="todo-description">
+              <h2 contenteditable="true" data-placeholder="Add Title"><%= todo.Title %></h2>
+              <div contenteditable="true" data-placeholder="Add description"><%= todo.Text %></div>
+            </div>
+            <div class="todo-settings hidden">
+              <form>Deadline: <input type="date" name="deadline" value=<%= new Date(todo.DueDate).toISOString().substr(0,10) %>></form>
+              <form>Add tag: <input type="text" placeholder="new tag" name="tag"></form>
+              <form>Importance<br>
+                <input type="radio" name="importance" value="1" <%if (todo.Priority == '1') {%>checked<%}%>>1
+                <input type="radio" name="importance" value="2" <%if (todo.Priority == '2') {%>checked<%}%>>2
+                <input type="radio" name="importance" value="3" <%if (todo.Priority == '3') {%>checked<%}%>>3
+              </form>
+            </div>
+          </section>
+      <% }); %>
+    </div>
   </main>
-  <button id="main-add"><p class="button-text">
-    +
-  </p></button>
 </body>
 </html>

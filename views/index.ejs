@@ -4,34 +4,36 @@
   <meta charset="UTF-8">
   <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/main.css" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap-social.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <title>TODAy</title>
 </head>
 <body>
   <header>
     <div class="title">
-      <img src="./images/logo_new_large.png" alt="TODAy">
+      <img id="title-logo" src="./images/Today-logo.png" alt="TODAy">
     </div>
-    <h2 class="subtitle">
-      Getting stuff done. Start today, not tomorrow!
-    </h2>
+    <div class="subtitle">
+      <h2>
+        Getting stuff done. Start today, not tomorrow!
+      </h2>
+    </div>
     <div class="button-row">
-      <button onclick="location.href='/todo'">Start</button>
-      <button onclick="location.href='/auth/twitter'">Login with Twitter</button>
+      <a class="btn" href="/todo">
+        <span>Log in</span>
+      </a>
+      <a class="btn" href="/todo">
+        <span>Sign up</span>
+      </a>
+    </div>
+    <div class="button-row">
+      <a class="btn btn-twitter" href="http://127.0.0.1:3000/auth/twitter">
+        <span class="fa fa-twitter"> Sign in with Twitter</span>
+      </a>
     </div>
   </header>
   <main>
-    <div class="col4 feature-description">
-      <img src="" alt="" class="feature-icon">
-      <p class="feature-text"></p>
-    </div>
-    <div class="col4 feature-description">
-      <img src="" alt="" class="feature-icon">
-      <p class="feature-text"></p>
-    </div>
-    <div class="col4 feature-description">
-      <img src="" alt="" class="feature-icon">
-      <p class="feature-text"></p>
-    </div>
+
   </main>
 </body>
 </html>

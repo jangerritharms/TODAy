@@ -47,7 +47,7 @@ function createTodo(existing) {
     pri = existing["Priority"];
   }
 
-  var emptyTodo = $('<section>', {class: 'group'});
+  var emptyTodo = $('<section>', {class: 'widget widget-col-1'});
   var b_delete = $('<button>', {class: 'delete-button'});
   var b_settings = $('<button>', {class: 'settings-button'});
   var b_completed = $('<button>', {class: 'completed-button'});
@@ -125,11 +125,11 @@ function createTodo(existing) {
   // to create Todo from existing todo
   if (typeof existing == undefined || existing['Id'] == undefined) {
     id = addTodo(emptyTodo);
-    $("main").append(emptyTodo);
-    $(".group[todo-id="+id+"]").find("h2").first().focus();
+    $(".content").append(emptyTodo);
+    $(".widget[todo-id="+id+"]").find("h2").first().focus();
   }
   else
-    $("main").append(emptyTodo);
+    $(".content").append(emptyTodo);
 
 }
 
@@ -137,7 +137,7 @@ function createTodo(existing) {
 function updateAllTodos() {
   $.get("/gettodos", function (data) {
     $.each(data, function (_, todo_item) {
-      var todo = $(".group[todo-id="+todo_item["Id"]+"]");
+      var todo = $(".widget[todo-id="+todo_item["Id"]+"]");
       if (todo.length > 0) {
         todo.children("h2").first().html(todo_item["Title"]);
         todo.children(".todo-description div").first().html(todo_item["Text"]);
@@ -153,9 +153,14 @@ function updateAllTodos() {
   });
 }
 
+function showWidgetSettings() {
+  $(".general").toggleClass("hidden");
+  $(".todo-settings-main").toggleClass("hidden");
+}
+
 // Main function executed on page reload
 function main() {
-
+  $("section").on("click", showWidgetSettings);
   $("#main-add").on("click", createTodo);
   setInterval(function () {
     updateAllTodos();

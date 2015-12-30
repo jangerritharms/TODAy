@@ -1,5 +1,5 @@
 body {
-  background-color: #aaa;
+  background-color: #ebeff0;
   color: #333;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
@@ -10,75 +10,107 @@ header {
   display: block;
   position: fixed;
   top: 0;
-  width: 100%;
-  height: 110px;
-  line-height: 110px;
-  background-color:  #fff;
+  width: 300px;
+  height: 100%;
+  background-color:  #0f0f38;
   text-align: center;
+  color: #ebeff0;
+}
+
+header * {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .logo-container {
   text-decoration: none;
-  position: absolute;
-  height: 100%;
-  line-height: inherit;
-  float: left;
-  left: 50px;
 }
 
 #logo {
-  max-width: 200px;
+  max-height: 80px;
   vertical-align: middle;
 }
 
 .search_form {
-  display: inline-block;
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  width: 80%;
+  left: 10%;
 }
 
 input[type="text"] {
+  background-color: transparent;
+  color: #ebeff0;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
-  padding: 4px;
-  border: solid 1px #aaa;
+  padding: 6px 12px;
+  font-weight: 300;
+  border: 1px solid;
+  border-radius: 4px;
 }
 
-#main-add {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  bottom: 50px;
-  right: 50px;
-  border-radius: 50px;
-  background-color: #FF62AA;
-  border: none;
-  font-size: 40px;
-  line-height: 50px;
+.profile-info {
+  display: block;
+}
+
+.profile-info * {
+  display: inline;
   vertical-align: middle;
 }
 
-.button-text {
-  display:block;
-	float:left;
-	width:100%;
-	padding-top:65%;
-  padding-bottom:50%;
-	line-height:1em;
-	margin-top:-0.5em;
-
-	text-align:center;
-	color:#eee;
-  font-family:"Raleway";
-  font-size:1.3em;
-  font-weight:bold;
-  text-decoration:none;
+#profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
-main{
-  border-radius: 5px;
-  border-width: 0;
-  position:fixed;
-  top: 110px;
+hr {
+  margin: 20px;
+}
 
+.button-row {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-weight: 300;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid #ebeff0;
+  border-radius: 4px;
+  color: #ebeff0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-inverted {
+  color: #0f0f38;
+}
+
+main {
+  position:fixed;
+  left: 300px;
+  right: 0;
+  height: 100%;
+}
+
+.content {
+  -moz-column-count: 4;
+  -moz-column-gap: 30px;
+  -webkit-column-count: 4;
+  -webkit-column-gap: 30px;
+  position: relative;
+  margin: 30px auto;
+  width: 1000px;
 }
 
 .subtitle {
@@ -89,70 +121,59 @@ main{
   bottom:50px;
 }
 
-button:hover {
-    color: red;
-}
-
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-placeholder);
     color: #aaa;
 }
 
-.group{
-  float: left;
-	height:260px;
-	width:180px;
-	color:#333;
+.widget {
+  display: inline-block;
+	min-height:150px;
+	color:#0f0f38;
   padding: 10px;
 	position:relative;
 	background-color:white;
-  margin: 15px;
-  box-shadow: 10px 10px 5px #888888;
+  margin: 0 0 15px;
+  box-shadow: 0px 5px 5px #888888;
+  border-radius: 4px;
 }
 
-.group[data-priority="1"] {
+.widget-col-1 {
+  width: 90%;
 }
 
-.group[data-priority="2"] {
+.widget-col-2 {
+  width: 190%;
 }
 
-.group[data-priority="3"] {
+.widget[data-priority="1"] {
+}
+
+.widget[data-priority="2"] {
+}
+
+.widget[data-priority="3"] {
 }
 
 .completed {
 }
 
-.delete-button{
-  position: absolute;
-  width: 15px;
-  height:15px;
-  border-radius: 15px;
-  background-color: red;
-  right: -10px;
-  top: 3px;
-  left: auto;
+.control-area {
+  position:absolute;
+  right: 5px;
+  top: 5px;
+  text-align: center;
 }
 
-.settings-button{
-  position: absolute;
-  width: 15px;
-  height:15px;
-  border-radius: 15px;
-  background-color: grey;
-  right: -10px;
-  top: 53px;
-  left: auto;
-}
-
-.completed-button{
-  position: absolute;
-  width: 15px;
-  height:15px;
-  border-radius: 15px;
-  background-color: Lawngreen;
-  right: -10px;
-  top: 28px;
-  left: auto;
+.control-button{
+  display:block;
+  width: 20px;
+  height:20px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-bottom: 3px;
+  color: #0f0f38;
 }
 
 .hidden {
@@ -172,6 +193,6 @@ button:hover {
   overflow: auto;
 }
 
-.todo-settings form {
-  margin-top: 5px;
+.todo-description h2 {
+  margin-right: 20px;
 }

@@ -28,7 +28,7 @@
       <h1>Todo</h1>
       <hr>
       <h4>Deadline: </h4>
-      <form><input type="date" name="deadline"></form>
+      <form><input type="text" class="fa" name="deadline" placeholder="&#xf073; yyyy-mm-dd HH:MM"></form>
       <h4>Add tag: </h4>
       <form><input type="text" class="fa" placeholder="&#xf02b; Add tag" name="tag"></form>
       <h4>Importance: </h4>
@@ -47,13 +47,16 @@
   <main>
     <div class="content">
       <% todos.forEach(function(todo) { %>
-          <section class="widget widget-col-1 <%if (todo.Completed == '1') {%>completed<%}%>" todo-id=<%= todo.Id %> data-priority=<%= todo.Priority %> >
+          <section class="widget widget-col-1 <%if (todo.Completed == '1') {%>completed<%}%>"
+            todo-id=<%= todo.Id %>
+            data-priority=<%= todo.Priority %>
+            data-duedate="<%= new Date(todo.DueDate).toISOString() %>" >
             <div class="control-area">
-              <a class="btn btn-control">
-                <span class="control-button delete fa fa-close"></span>
+              <a class="btn btn-control delete">
+                <span class="control-button fa fa-close"></span>
               </a>
-              <a class="btn btn-control">
-                <span class="control-button complete fa fa-check"></span>
+              <a class="btn btn-control complete">
+                <span class="control-button fa fa-check"></span>
               </a>
             </div>
             <div class="todo-description">

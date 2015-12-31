@@ -39,7 +39,7 @@ http.createServer(app).listen(port);
 
 //clients requests todos
 app.get("/gettodos", function (req, res) {
-  con.query('SELECT * FROM ToDoItem Where Priority = 1',function(err,rows){
+  con.query('SELECT * FROM ToDoItem',function(err,rows){
     if(err) throw err;
 
     res.json(rows);
@@ -50,7 +50,7 @@ app.get("/gettodos", function (req, res) {
 app.get("/todo", isLoggedIn,  function (req, res) {
   console.log(req.user);
 	console.log("Todo page requested");
-  con.query('SELECT * FROM ToDoItem Where Priority = 1',function(err,rows){
+  con.query('SELECT * FROM ToDoItem',function(err,rows){
     if(err) throw err;
 
     res.render("todo", {

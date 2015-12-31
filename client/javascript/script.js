@@ -70,8 +70,7 @@ function createTodo(existing) {
   var content = $('<div>', {class: 'todo-description'});
   var header = $('<h2>', {contenteditable: 'true', 'data-placeholder': 'Add Title'}).text(title);
   var desc = $('<div>', {contenteditable: 'true', 'data-placeholder': 'Add description'}).text(desc);
-  content.append(header);
-  content.append(desc);
+
   if (completed == 1) {
     emptyTodo.addClass("completed");
   }
@@ -93,6 +92,9 @@ function createTodo(existing) {
   desc.on('blur', function(e) {
     updateTodo($(this).parent().parent(), {Text: $(this).text()});
   });
+
+  content.append(header);
+  content.append(desc);
 
   emptyTodo.append(controlArea);
   emptyTodo.append(content);
@@ -148,11 +150,18 @@ function showWidgetSettings(section) {
     updateTodo(section, {Priority: $(this).val()});
     section.attr('data-priority', $(this).val());
   });
+  $(document).one("keydown", function(e) {
+    if (e.keyCode == 27) {
+      showGeneralSettings();
+      $(":focus").blur();
+    }
+  });
 }
 
 function showGeneralSettings() {
   $(".general").removeClass("hidden");
   $(".todo-settings-main").addClass("hidden");
+  $(document).unbind('keydown');
 };
 
 // Main function executed on page reload
@@ -166,6 +175,7 @@ function main() {
   });
   $("section").on("click", function(e) {
     e.stopPropagation();
+    showWidgetSettings($(this));
   });
   $("header").on("click", function(e) {
     e.stopPropagation();

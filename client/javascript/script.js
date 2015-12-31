@@ -88,9 +88,11 @@ function createTodo(existing) {
   });
   header.on('blur', function(e) {
     updateTodo($(this).parent().parent(), {Title: $(this).text()});
+    showGeneralSettings();
   });
   desc.on('blur', function(e) {
     updateTodo($(this).parent().parent(), {Text: $(this).text()});
+    showGeneralSettings();
   });
 
   content.append(header);
@@ -191,6 +193,21 @@ function main() {
       updateTodo($(this).parent(), {Completed: 1, CompletionDate: new Date().toISOString().substr(0,10)});
     }
     $(this).parent().toggleClass("completed");
+  });
+  $(".todo-description h2").on('keypress', function(e){
+    if (e.which == 13) {
+      e.preventDefault();
+      $(this).blur();
+      updateTodo($(this).parent().parent(), {Title: $(this).text()});
+    }
+  });
+  $(".todo-description h2").on('blur', function(e) {
+    updateTodo($(this).parent().parent(), {Title: $(this).text()});
+    showGeneralSettings();
+  });
+  $(".todo-description div").on('blur', function(e) {
+    updateTodo($(this).parent().parent(), {Text: $(this).text()});
+    showGeneralSettings();
   });
   $("#main-add").on("click", createTodo);
   setInterval(function () {

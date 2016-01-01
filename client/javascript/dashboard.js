@@ -27,14 +27,14 @@ function updateBarChart(el, todos) {
 
 // Ajax request for the completion times by tag
 function getCompletionTime(tagid) {
-  $.get("/todosCompletionTime", {TagId: tagid})
+  $.get("/dashboard/todosCompletionTime", {TagId: tagid})
     .done(function (todos) {
       updateBarChart($('#completion-by-tag').children('.bar-chart').first(), todos);
   });
 }
 
 function getTagCoocurrence(el) {
-  $.get("/todosTagFrequency")
+  $.get("/dashboard/todosTagFrequency")
     .done(function (tags) {
       for (var i=0; i < tags.length; i++) {
         el.append($('<p>').text("Tags: "+tags[i]["Tag1"]+", "+tags[i]["Tag2"]+" Frequency: "+tags[i]["amount"]));

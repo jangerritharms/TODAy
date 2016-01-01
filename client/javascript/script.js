@@ -1,7 +1,7 @@
 // Add a new (empty) todo to the server list
 function addTodo(el) {
   var new_id;
-  $.get("/addtodo", {Priority: 1,
+  $.get("/todo/addtodo", {Priority: 1,
                      CreationDate: new Date().toISOString().substr(0,10)})
     .done(function (id) {
       new_id = id;
@@ -13,12 +13,12 @@ function addTodo(el) {
 // Update the data in the todo on the server
 function updateTodo(el, data) {
   data["Id"] = el.attr("todo-id");
-  $.get("/updatetodo", data);
+  $.get("/todo/updatetodo", data);
 }
 
 // Delete a todo item
 function deleteTodo(el) {
-  $.get("/deletetodo", {Id: el.attr("todo-id")});
+  $.get("/todo/deletetodo", {Id: el.attr("todo-id")});
   el.remove();
 }
 
@@ -84,6 +84,7 @@ function createTodo(existing) {
       e.preventDefault();
       $(this).blur();
       updateTodo($(this).parent().parent(), {Title: $(this).text()});
+      showGeneralSettings();
     }
   });
   header.on('blur', function(e) {
@@ -122,7 +123,7 @@ function createTodo(existing) {
 
 // Get todos from database on server
 function updateAllTodos() {
-  $.get("/gettodos", function (data) {
+  $.get("/todo/gettodos", function (data) {
     $.each(data, function (_, todo_item) {
       var todo = $(".widget[todo-id="+todo_item["Id"]+"]");
       if (todo.length > 0) {
@@ -143,8 +144,10 @@ function updateAllTodos() {
 function showWidgetSettings(section) {
   $(".general").addClass("hidden");
   $(".todo-settings-main").removeClass("hidden");
-  $(".todo-settings-main > form > input[name='deadline']").val(section.attr('data-duedate').substr(0,10));
-  $(".todo-settings-main > form > input[value="+section.attr('data-priority')+"]").prop('checked', true);
+  if (section.attr('data-duedate'))
+    $(".todo-settings-main > form > input[name='deadline']").val(section.attr('data-duedate').substr(0,10));
+  if (section.attr('data-priority'))
+    $(".todo-settings-main > form > input[value="+section.attr('data-priority')+"]").prop('checked', true);
   $(".todo-settings-main > form > input[name='deadline']").change(function(e) {
     updateTodo(section, {DueDate: $(this).val()});
   });
@@ -164,6 +167,8 @@ function showGeneralSettings() {
   $(".general").removeClass("hidden");
   $(".todo-settings-main").addClass("hidden");
   $(document).unbind('keydown');
+  $(".todo-settings-main > form > input[name='deadline']").unbind('change');
+  $(".todo-settings-main > form > input[name='importance']").unbind('click');
 };
 
 // Main function executed on page reload
@@ -199,15 +204,14 @@ function main() {
       e.preventDefault();
       $(this).blur();
       updateTodo($(this).parent().parent(), {Title: $(this).text()});
+      showGeneralSettings();
     }
   });
   $(".todo-description h2").on('blur', function(e) {
     updateTodo($(this).parent().parent(), {Title: $(this).text()});
-    showGeneralSettings();
   });
   $(".todo-description div").on('blur', function(e) {
     updateTodo($(this).parent().parent(), {Text: $(this).text()});
-    showGeneralSettings();
   });
   $("#main-add").on("click", createTodo);
   setInterval(function () {

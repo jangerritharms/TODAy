@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TODAy</title>
+  <script type="text/javascript" src="/javascript/jquery-2.1.4.min.js"></script>
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/profile.css" type="text/css">
+</head>
+<body>
+  <header>
+    <div class="header-content general">
+      <h1>Settings</h1>
+      <hr>
+      <a class="link" id="profile-link">
+        <span class="fa fa-user"> Profile</span>
+      </a>
+      <a class="link" id="styling-link">
+        <span class="fa fa-paint-brush"> Styling</span>
+      </a>
+    </div>
+    <a href="/" class="logo-container">
+      <img id="logo" src="/images/Today-logo-wide.png" alt="TODAy">
+    </a>
+  </header>
+  <main>
+    <div class="content">
+      <section class="widget widget-col-4">
+        <div class='profile-head'>
+          <img id="profile-image" src=<%= user.photos[0].value%> />
+          <h1 id="profile-name"><%= user.displayName %></h1>
+        </div>
+        <div class="col-2">
+          <h3>User name: </h3>
+          <form class="inverted">
+            <input type="text" name="email" class='fa inverted' placeholder="&#xf0e0; Add mail address" value=<%= user.displayName %>>
+          </form>
+          <h3>Logged in with: </h3>
+          <p style="display: inline">
+            <%= user.provider %>
+          </p>
+          <a href="/" class="btn inverted" style="float: right;">
+            <span class="fa fa-share-alt"> Connect account</span>
+          </a>
+        </div>
+        <div class="col-2">
+          <h3>Displayed name: </h3>
+          <form class="inverted">
+            <input type="text" name="email" class='fa inverted' value=<%= user.displayName %>>
+          </form>
+          <h3>Email address: </h3>
+          <form class="inverted">
+            <input type="text" name="email" class='fa inverted' placeholder="&#xf0e0; Add mail address">
+          </form>
+        </div>
+      </section>
+      <section class='widget widget-col-4'>
+        <h1>
+          Styling
+        </h1>
+        <div class="col-2">
+          <h3>Side bar color: </h3>
+          <form class='inverted'>
+            <input type="text" name="email" class='fa inverted' placeholder="&#xf0e0; Add mail address" value=<%= user.displayName %>>
+          </form>
+          <h3>Accent color: </h3>
+          <form class='inverted'>
+            <input type="text" name="email" class='fa inverted' placeholder="&#xf0e0; Add mail address" value=<%= user.displayName %>>
+          </form>
+        </div>
+        <div class="col-2">
+          <h3>Board background color: </h3>
+          <form class='inverted'>
+            <input type="text" name="email" class='fa inverted' value=<%= user.displayName %>>
+          </form>
+          <h3>Board item color: </h3>
+          <form class='inverted'>
+            <input type="text" name="email" class='fa inverted'>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

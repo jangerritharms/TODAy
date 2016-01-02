@@ -21,6 +21,7 @@ app.use(passport.session()); // persistent login sessions
 app.use('/', require('./routes/index'));
 app.use('/todo', require('./routes/todo'));
 app.use('/dashboard', require('./routes/dashboard'));
+app.use('/profile', require('./routes/profile'));
 
 db.connect({
   host: 'localhost',

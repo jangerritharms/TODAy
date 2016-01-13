@@ -13,8 +13,10 @@
   <header>
     <div class="header-content general">
       <div class="profile-info">
-        <img id="profile-image" src=<%= user.photos[0].value%> ><br>
-        <p><%= user.displayName %></p>
+        <a href='/profile'>
+          <img id="profile-image" src=<%= user.photos[0].value%> ><br>
+          <p><%= user.displayName %></p>
+        </a>
       </div>
       <hr>
       <form class="search_form" method="post" action="#">

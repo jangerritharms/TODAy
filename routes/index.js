@@ -3,7 +3,7 @@ var router = require("express").Router();
 var db = require('../db');
 
 // Show entry page
-router.get("/", function (req, res) {
+router.get(/^\/($|home)/, function (req, res) {
   console.log("Front page requested!");
   res.render("index");
 });

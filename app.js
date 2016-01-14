@@ -12,31 +12,35 @@ var port = 3000;
 var app = express();
 
 require("./config/passport")(passport);
-    
+
 function compile(str, path) {
+  console.log("Compiling stylus");
   return stylus(str)
     .set('filename', path)
-    .define('bg_color', '#0f0f38')
-    .define('fg_color', '#ebeff0')
+    .define('bg_color', "#0f0f38")
+    .define('fg_color', "#ebeff0")
     .use(nib());
 }
 
 app.set('view engine', 'ejs');
 app.use(cookieParser());
-app.use(express.static(__dirname + "/client"));
 app.use(stylus.middleware(
-  { src: __dirname + '/client/css'
+  { src: __dirname + '/client/resources/'
+  , dest: __dirname + '/client/'
   , compile: compile
+  , debug: true
+  , force: true
   }
 ));
+app.use(express.static(__dirname + "/client"));
 app.use(session({secret: 'twitterLogin'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-app.use('/', require('./routes/index'));
-app.use('/todo', require('./routes/todo'));
-app.use('/dashboard', require('./routes/dashboard'));
-app.use('/profile', require('./routes/profile'));
+app.use("/", require('./routes/index'));
+app.use(/^\/todo.?/, require('./routes/todo'));
+app.use(/^\/dashboard.?/, require('./routes/dashboard'));
+app.use(/^\/profile.?/, require('./routes/profile'));
 
 
 db.connect({
